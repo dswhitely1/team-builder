@@ -7,7 +7,7 @@ export const useForm = (initialState, handleCallBack) => {
     };
     const handleSubmit = e => {
         e.preventDefault();
-        handleCallBack();
+        handleCallBack(values);
         setValues(initialState);
     };
 
