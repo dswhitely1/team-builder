@@ -4,7 +4,6 @@ import {Route, Switch} from 'react-router-dom';
 import Team from './teams/Team'
 import TeamForm from './form/TeamForm';
 import AddTeamListForm from "./form/AddTeamListForm";
-import {useTeam} from "../hooks/useTeam";
 import Navigation from "./navigation/Navigation";
 
 function App() {
@@ -36,8 +35,12 @@ function App() {
         <>
             <Navigation/>
             <Switch>
+                <Route path='/edit-team/:id'
+                       render={props => <AddTeamListForm {...props} updateTeamList={setTeamList} teamList={teamList}
+                                                         edit={true}/>}/>
                 <Route path='/add-team'
-                       render={props => <AddTeamListForm {...props} updateTeamList={setTeamList} teamList={teamList}/>}/>
+                       render={props => <AddTeamListForm {...props} updateTeamList={setTeamList} teamList={teamList}
+                                                         edit={false}/>}/>
                 <Route path='/edit/:id'
                        render={props => <TeamForm {...props} edit={true} members={teams} addTeam={setTeams}/>}/>
                 <Route path='/add'

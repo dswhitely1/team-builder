@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from "../../hooks/useForm";
 import {makeStyles} from '@material-ui/core/styles'
 import Container from "@material-ui/core/Container";
@@ -38,7 +38,30 @@ function AddTeamListForm(props) {
         team: ''
     }, submit);
 
+    useEffect(()=> {
+        if (props.edit) {
+            console.log(`I was called`);
+            updateGroupList(props.teamList[Number(props.match.params.id)]);
+        }
+    },[props.teamList, props.match.params.id])
+
     function submit() {
+        props.edit ? editGroup() : addNewGroup();
+    }
+
+    function editGroup() {
+        const updatedGroupList = props.teamList.map(group => {
+            if (group.id.toString()===props.match.params.id) {
+                return formValues
+            } else {
+                return group
+            }
+        })
+        props.updateTeamList(updatedGroupList);
+        props.history.push('/add-team');
+    }
+
+    function addNewGroup() {
         const id = props.teamList.length === 0 ? 0 : props.teamList[props.teamList.length - 1].id + 1;
         const updatedTeamList = {id, ...formValues}
         console.log(`ID: ${id}, GROUP: ${updatedTeamList}`)

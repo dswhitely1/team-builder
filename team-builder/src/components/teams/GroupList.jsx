@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link as RouterLink} from 'react-router-dom';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -14,8 +15,8 @@ function GroupList(props) {
                     {props.group.team}
                 </ListItemText>
                 <ListItemSecondaryAction>
-                    <IconButton edge='end' aria-label='Edit'>
-                        <Edit/>
+                    <IconButton edge='end' aria-label='Edit' component={RouterLink} to={`/edit-team/${props.group.id}`}>
+                        <Edit />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>
