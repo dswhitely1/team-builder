@@ -5,6 +5,7 @@ import Team from './teams/Team'
 import TeamForm from './form/TeamForm';
 import AddTeamListForm from "./form/AddTeamListForm";
 import {useTeam} from "../hooks/useTeam";
+import Navigation from "./navigation/Navigation";
 
 function App() {
     const [teamList, getNextId, updateTeamList] = useTeam([]);
@@ -30,13 +31,18 @@ function App() {
     }, [teamList]);
 
     return (
-        <Switch>
-            <Route path='/add-team'
-                   render={props => <AddTeamListForm {...props} updateTeam={updateTeamList} nextId={getNextId}/>}/>
-            <Route path='/edit/:id' render={props => <TeamForm {...props} edit={true} members={teams} addTeam={setTeams}/>}/>
-            <Route path='/add' render={props => <TeamForm {...props} edit={false} members={teams} addTeam={setTeams}/>}/>
-            <Route path='/' render={() => <Team teamMembers={teams} teamGroups={teamList}/>}/>
-        </Switch>
+        <>
+            <Navigation/>
+            <Switch>
+                <Route path='/add-team'
+                       render={props => <AddTeamListForm {...props} updateTeam={updateTeamList} nextId={getNextId}/>}/>
+                <Route path='/edit/:id'
+                       render={props => <TeamForm {...props} edit={true} members={teams} addTeam={setTeams}/>}/>
+                <Route path='/add'
+                       render={props => <TeamForm {...props} edit={false} members={teams} addTeam={setTeams}/>}/>
+                <Route path='/' render={() => <Team teamMembers={teams} teamGroups={teamList}/>}/>
+            </Switch>
+        </>
 
     )
 }
