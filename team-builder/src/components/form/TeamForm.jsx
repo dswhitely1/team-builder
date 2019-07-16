@@ -1,7 +1,38 @@
 import React, {useEffect} from 'react';
 import {useForm} from '../../hooks/useForm';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import {makeStyles} from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
+
+const useStyles = makeStyles(theme => ({
+    '@global': {
+        body: {
+            backgroundColor: theme.palette.common.white,
+        }
+    },
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    title: {
+        marginTop: theme.spacing(1),
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        magin: theme.spacing(3, 0, 2)
+    }
+}));
+
 
 const TeamForm = props => {
+    const classes = useStyles();
     const [formValues, handleChange, handleSubmit, updateTeamMember] = useForm({
         name: '',
         role: '',
@@ -49,18 +80,22 @@ const TeamForm = props => {
 
 
     return (
-        <>
-            <h1>Add New Member</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Name</label>
-                <input value={formValues.name} name='name' onChange={handleChange}/>
-                <label>Email</label>
-                <input value={formValues.email} name='email' onChange={handleChange}/>
-                <label>Role</label>
-                <input value={formValues.role} name='role' onChange={handleChange}/>
-                <button>Submit</button>
-            </form>
-        </>
+        <Container component='section' maxWidth='sm'>
+            <div className={classes.paper}>
+                <Typography component='h1' variant='h5' className={classes.title}>
+                    {props.edit ? `Edit Team Member` : `Add New Team Member`}
+                </Typography>
+                <form className={classes.form} onSubmit={handleSubmit}>
+                    <TextField variant='outlined' margin='normal' type='text' required fullWidth id='name' label='Name'
+                               onChange={handleChange} value={formValues.name} name='name' autoFocus/>
+                    <TextField variant='outlined' margin='normal' type='email' required fullWidth id='email' label='Email Address'
+                               onChange={handleChange} value={formValues.email} name='email'/>
+                    <TextField variant='outlined' margin='normal' type='text' required fullWidth id='role' label='Current Role'
+                               onChange={handleChange} value={formValues.role} name='role'/>
+                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>Submit</Button>
+                </form>
+            </div>
+        </Container>
     )
 
 };
