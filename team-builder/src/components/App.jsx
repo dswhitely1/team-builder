@@ -29,13 +29,12 @@ function App() {
         }
     }, [teamList]);
 
-
     return (
         <Switch>
             <Route path='/add-team'
                    render={props => <AddTeamListForm {...props} updateTeam={updateTeamList} nextId={getNextId}/>}/>
-            <Route path='/edit/:id' render={() => <TeamForm edit={true} members={teams}/>}/>
-            <Route path='/add' render={() => <TeamForm edit={false} members={teams} addTeam={setTeams}/>}/>
+            <Route path='/edit/:id' render={props => <TeamForm {...props} edit={true} members={teams} addTeam={setTeams}/>}/>
+            <Route path='/add' render={props => <TeamForm {...props} edit={false} members={teams} addTeam={setTeams}/>}/>
             <Route path='/' render={() => <Team teamMembers={teams} teamGroups={teamList}/>}/>
         </Switch>
 
