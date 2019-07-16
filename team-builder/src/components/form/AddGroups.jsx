@@ -32,18 +32,18 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function AddTeamListForm(props) {
+function AddGroups(props) {
     const classes = useStyles();
     const [formValues, handleChange, handleSubmit, updateGroupList] = useForm({
         team: ''
     }, submit);
 
-    useEffect(()=> {
+    useEffect(() => {
         if (props.edit) {
             console.log(`I was called`);
             updateGroupList(props.teamList[Number(props.match.params.id)]);
         }
-    },[props.teamList, props.match.params.id])
+    }, [props.teamList, props.match.params.id])
 
     function submit() {
         props.edit ? editGroup() : addNewGroup();
@@ -51,7 +51,7 @@ function AddTeamListForm(props) {
 
     function editGroup() {
         const updatedGroupList = props.teamList.map(group => {
-            if (group.id.toString()===props.match.params.id) {
+            if (group.id.toString() === props.match.params.id) {
                 return formValues
             } else {
                 return group
@@ -80,14 +80,15 @@ function AddTeamListForm(props) {
                     <TextField variant='outlined' margin='normal' type='text' required fullWidth id='team'
                                value={formValues.team} label='Group Name' onChange={handleChange} name='team'
                                autoFocus/>
-                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>Submit</Button>
+                    <Button type='submit' fullWidth variant='contained' color='primary'
+                            className={classes.submit}>Submit</Button>
                 </form>
             </div>
             <List>
-            {props.teamList.map(group => <GroupList group={group}/>)}
+                {props.teamList.map(group => <GroupList group={group}/>)}
             </List>
         </Container>
     )
 }
 
-export default AddTeamListForm;
+export default AddGroups;

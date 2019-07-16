@@ -37,6 +37,7 @@ const TeamForm = props => {
         name: '',
         role: '',
         email: '',
+        groups: []
     }, submit);
     console.log(props);
     useEffect(() => {

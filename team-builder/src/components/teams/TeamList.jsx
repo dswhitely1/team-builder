@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
+import TeamGroupList from "./TeamGroupList";
 
 const useStyles = makeStyles({
     card: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 });
 
 function TeamList(props) {
+    console.log(props);
     const classes = useStyles();
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -36,9 +38,11 @@ function TeamList(props) {
                 <Typography className={classes.pos} color="textSecondary">
                     {props.teamMember.email}
                 </Typography>
+                <TeamGroupList groups={props.teamMember.groups} />
             </CardContent>
             <CardActions>
                 <Button size='small' component={RouterLink} to={`/edit/${props.teamMember.id}`}>Edit</Button>
+                <Button size='small' component={RouterLink} to={`/edit-member-team/${props.teamMember.id}`}>Manage Groups</Button>
             </CardActions>
         </Card>
         </Grid>

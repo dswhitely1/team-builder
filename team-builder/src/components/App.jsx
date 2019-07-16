@@ -3,8 +3,9 @@ import {Route, Switch} from 'react-router-dom';
 
 import Team from './teams/Team'
 import TeamForm from './form/TeamForm';
-import AddTeamListForm from "./form/AddTeamListForm";
+import AddGroups from "./form/AddGroups";
 import Navigation from "./navigation/Navigation";
+import AddMemberToGroups from "./form/AddMemberToGroups";
 
 function App() {
     const [teamList, setTeamList] = useState([{id: 0, team: 'WEBPT8'}, {id: 1, team: 'WEB20'}]);
@@ -35,12 +36,13 @@ function App() {
         <>
             <Navigation/>
             <Switch>
+                <Route path='/edit-member-team/:id' render={props => <AddMemberToGroups {...props} teamList={teamList} members={teams} addTeam={setTeams}/>} />
                 <Route path='/edit-team/:id'
-                       render={props => <AddTeamListForm {...props} updateTeamList={setTeamList} teamList={teamList}
-                                                         edit={true}/>}/>
+                       render={props => <AddGroups {...props} updateTeamList={setTeamList} teamList={teamList}
+                                                   edit={true}/>}/>
                 <Route path='/add-team'
-                       render={props => <AddTeamListForm {...props} updateTeamList={setTeamList} teamList={teamList}
-                                                         edit={false}/>}/>
+                       render={props => <AddGroups {...props} updateTeamList={setTeamList} teamList={teamList}
+                                                   edit={false}/>}/>
                 <Route path='/edit/:id'
                        render={props => <TeamForm {...props} edit={true} members={teams} addTeam={setTeams}/>}/>
                 <Route path='/add'
