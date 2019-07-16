@@ -32,9 +32,8 @@ function Navigation() {
                     <Typography variant='h6' className={classes.title}>
                         Team Builder
                     </Typography>
-
                     <Button color="inherit" component={RouterLink} to='/add'>Add Team Member</Button>
-
+                    <Button color="inherit" component={RouterLink} to='/add-team'>Manage Groups</Button>
                 </Toolbar>
             </AppBar>
         </div>

@@ -8,11 +8,11 @@ import {useTeam} from "../hooks/useTeam";
 import Navigation from "./navigation/Navigation";
 
 function App() {
-    const [teamList, getNextId, updateTeamList] = useTeam([]);
+    const [teamList, setTeamList] = useState([{id: 0, team: 'WEBPT8'}, {id: 1, team: 'WEB20'}]);
     const [teams, setTeams] = useState([]);
     useEffect(() => {
         if (localStorage.getItem('team-list')) {
-            updateTeamList(JSON.parse(localStorage.getItem('team-list')));
+            setTeamList(JSON.parse(localStorage.getItem('team-list')));
         }
         if (localStorage.getItem('teams')) {
             setTeams(JSON.parse(localStorage.getItem('teams')));
@@ -21,11 +21,13 @@ function App() {
 
     useEffect(() => {
         if (teams !== []) {
+            localStorage.removeItem('teams');
             localStorage.setItem('teams', JSON.stringify(teams))
         }
     }, [teams]);
     useEffect(() => {
         if (teamList !== []) {
+            localStorage.removeItem('team-list');
             localStorage.setItem('team-list', JSON.stringify(teamList))
         }
     }, [teamList]);
@@ -35,7 +37,7 @@ function App() {
             <Navigation/>
             <Switch>
                 <Route path='/add-team'
-                       render={props => <AddTeamListForm {...props} updateTeam={updateTeamList} nextId={getNextId}/>}/>
+                       render={props => <AddTeamListForm {...props} updateTeamList={setTeamList} teamList={teamList}/>}/>
                 <Route path='/edit/:id'
                        render={props => <TeamForm {...props} edit={true} members={teams} addTeam={setTeams}/>}/>
                 <Route path='/add'

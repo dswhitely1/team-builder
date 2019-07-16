@@ -19,7 +19,7 @@ function Team(props) {
     return (
         <>
             <CSSBaseline/>
-            <Container maxWidth='lg' component='section' className={classes.root}>
+            <Container maxWidth='xl' component='section' className={classes.root}>
                 <Grid container spacing={3} direction='row' justify='center' alignItems='center'>
                     {props.teamMembers.map(member => <TeamList teamMember={member}/>)}
                 </Grid>

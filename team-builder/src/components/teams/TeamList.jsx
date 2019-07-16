@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 function TeamList(props) {
     const classes = useStyles();
     return (
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
         <Card className={classes.card} raised>
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
